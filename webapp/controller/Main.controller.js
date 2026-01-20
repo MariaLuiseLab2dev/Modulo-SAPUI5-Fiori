@@ -40,18 +40,7 @@ sap.ui.define([
             });
         },
         formatPrice(value) {
-            if (!value) {
-                console.log(`[ERROR] Campo Valor vazio: [${value}]`);
-                return "";
-            }
-
             let number = parseFloat(value);
-
-            if (isNaN(number)) {
-                console.log(`[ERROR] Valor inválido: [${number}]`);
-                return "";
-            }
-
             return number.toLocaleString(
                 "pt-BR",
                 {
@@ -98,7 +87,6 @@ sap.ui.define([
         onAddItemPress() {
             const nomeInput = this.byId("_IDinputNome");
             const valorInput = this.byId("_IDinputValor");
-            const dataInput = this.byId("_IDinputData");
 
             const nome = nomeInput.getValue().trim(); 
             const valor = valorInput.getValue().trim(); 

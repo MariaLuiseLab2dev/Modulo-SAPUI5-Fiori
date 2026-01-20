@@ -5,17 +5,17 @@
     <Page id="_IDpage" title="Pedidos">
             <Panel headerText="Cadastro de Pedido" expandable="false" class="sapUiContentPadding">
                 <HBox id="_IDHBoxCadastro" justifyContent="SpaceBetween">
-                    <VBox class="sapUiContentPadding">
+                    <VBox>
                         <Label id="_IDlabelNome" text="Nome" labelFor="inputValor" />
                         <Input id="_IDinputNome" type="Text" placeholder="Digite o nome do produto" width="600px"/>
                     </VBox>
                     
-                    <VBox class="sapUiContentPadding">
+                    <VBox>
                         <Label id="_IDlabelValor" text="Valor" labelFor="inputValor" />
                         <Input id="_IDinputValor" type="Number" placeholder="Digite um valor" width="200px"/>
                     </VBox>
                     
-                    <VBox class="sapUiContentPadding">
+                    <VBox>
                         <Label id="_IDlabelData" text="Data" labelFor="inputData" />
                         <Input id="_IDinputData" type="Date" value="{FieldsDate>/currentDate}" editable="false" width="200px"/>
                     </VBox>
@@ -42,13 +42,13 @@
                                 path: 'ProductList>valor',
                                 formatter: '.formatPrice'
                             }">
-                            <firstStatus> 
-                                <ObjectStatus text="{ 
+                            <attributes> 
+                                <ObjectAttribute text="{ 
                                     path: 'ProductList>data', 
                                     formatter: '.formatDate'
-                                    }" 
+                                    }"
                                 />
-                            </firstStatus>
+                            </attributes>
                         </ObjectListItem>
                     </items>
                 </List>
