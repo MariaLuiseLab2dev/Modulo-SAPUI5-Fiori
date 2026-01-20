@@ -1,0 +1,57 @@
+<mvc:View controllerName="studies.firstui5project.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page id="_IDpage" title="Pedidos">
+            <Panel headerText="Cadastro de Pedido" expandable="false" class="sapUiContentPadding">
+                <HBox id="_IDHBoxCadastro" justifyContent="SpaceBetween">
+                    <VBox class="sapUiContentPadding">
+                        <Label id="_IDlabelNome" text="Nome" labelFor="inputValor" />
+                        <Input id="_IDinputNome" type="Text" placeholder="Digite o nome do produto" width="600px"/>
+                    </VBox>
+                    
+                    <VBox class="sapUiContentPadding">
+                        <Label id="_IDlabelValor" text="Valor" labelFor="inputValor" />
+                        <Input id="_IDinputValor" type="Number" placeholder="Digite um valor" width="200px"/>
+                    </VBox>
+                    
+                    <VBox class="sapUiContentPadding">
+                        <Label id="_IDlabelData" text="Data" labelFor="inputData" />
+                        <Input id="_IDinputData" type="Date" value="{FieldsDate>/currentDate}" editable="false" width="200px"/>
+                    </VBox>
+                </HBox>
+
+                <HBox justifyContent="End">
+                    <Button id="_IDButtonAdd" text="Adicionar" press=".onAddItemPress" />
+                </HBox>
+               
+            </Panel>
+            
+
+            <Panel headerText="Lista de Pedidos" expandable="false">
+                <List id="_IDList" items="{ProductList>/items}">
+                    <items>
+                        <ObjectListItem 
+                       title="{ 
+                            parts: [ 
+                                {path: 'ProductList>name'}, 
+                                {path: 'ProductList>index'} ], 
+                                formatter: '.formatTitle'
+                            }"
+                            number="{
+                                path: 'ProductList>valor',
+                                formatter: '.formatPrice'
+                            }">
+                            <firstStatus> 
+                                <ObjectStatus text="{ 
+                                    path: 'ProductList>data', 
+                                    formatter: '.formatDate'
+                                    }" 
+                                />
+                            </firstStatus>
+                        </ObjectListItem>
+                    </items>
+                </List>
+            </Panel>
+    </Page>
+</mvc:View>
