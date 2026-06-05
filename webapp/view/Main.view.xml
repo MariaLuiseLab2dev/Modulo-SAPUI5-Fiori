@@ -1,13 +1,27 @@
 <mvc:View controllerName="studies.firstui5project.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
 
     <Page id="_IDpage" title="Pedidos">
             <Panel headerText="Cadastro de Pedido" expandable="false" class="sapUiContentPadding">
                 <HBox id="_IDHBoxCadastro" justifyContent="SpaceBetween">
                     <VBox>
-                        <Label id="_IDlabelNome" text="Nome" labelFor="inputValor" />
-                        <Input id="_IDinputNome" type="Text" placeholder="Digite o nome do produto" width="600px"/>
+                        <Label id="_IDlabelProduto" text="Produto" labelFor="_IDinputProduto" />
+                        <ComboBox id="_IDinputProduto"
+                                    placeholder="Selecione um produto"
+                                    items="{path: 'products>/'}"
+                                    selectionChange=".onProductChange"
+                                    width="300px">
+                            <core:Item key="{products>ID}" text="{products>name}" />
+                        </ComboBox>
+                    </VBox>
+
+                    <VBox>
+                        <Label id="_IDlabelCategoria" text="Categoria" labelFor="inputCategoria" />
+                        <ComboBox id="_IDinputCategoria"  placeholder="Selecione uma categoria" items="{path: 'l2dProductsCatalog>/Categories'}" width="250px">
+                            <core:Item key="{l2dProductsCatalog>ID}" text="{l2dProductsCatalog>name}"/>
+                        </ComboBox>
                     </VBox>
                     
                     <VBox>
@@ -26,31 +40,18 @@
                 </HBox>
                
             </Panel>
-            
 
             <Panel headerText="Lista de Pedidos" expandable="false">
-                <List id="_IDList" items="{ProductList>/items}">
-                    <items>
-                        <ObjectListItem 
-                       title="{ 
-                            parts: [ 
-                                {path: 'ProductList>name'}, 
-                                {path: 'ProductList>index'} ], 
-                                formatter: '.formatTitle'
-                            }"
-                            number="{
-                                path: 'ProductList>valor',
-                                formatter: '.formatPrice'
-                            }">
-                            <attributes> 
-                                <ObjectAttribute text="{ 
-                                    path: 'ProductList>data', 
-                                    formatter: '.formatDate'
-                                    }"
-                                />
-                            </attributes>
-                        </ObjectListItem>
-                    </items>
+                <List
+                    id="idItemsList"
+                    items="{
+                        path: 'orders>/items'
+                    }"
+                >
+                    <ObjectListItem title="{orders>product}">
+                        <ObjectAttribute title="Preço" text="{ path: 'orders>price', formatter: '.formatPrice' }"></ObjectAttribute>
+                        <ObjectAttribute title="Categoria" text="{orders>category}"></ObjectAttribute>
+                    </ObjectListItem>
                 </List>
             </Panel>
     </Page>

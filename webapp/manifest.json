@@ -14,6 +14,17 @@
       "id": "@sap/generator-fiori:basic",
       "version": "1.20.0",
       "toolsId": "1b6ccb6f-0c4c-40f9-b8d4-41ca3c1c0690"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "l2dProductsCatalog/odata/v4/catalog/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -50,6 +61,15 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
           "bundleName": "studies.firstui5project.i18n.i18n"
+        }
+      },
+      "l2dProductsCatalog": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
         }
       }
     },

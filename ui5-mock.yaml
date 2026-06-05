@@ -9,7 +9,6 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        debug: true
         ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         ui5:
           path:
@@ -17,11 +16,9 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend:
-            - url: https://6b146da5trial-dev-l2d-products-srv.cfapps.us10-001.hana.ondemand.com
-              authenticationType: BasicAuthentication
-              destination: L2D_PRODUCTS_API
-              path: /l2dProductsCatalog
-              pathPrefix: /
+          - path: /odata/v4/catalog
+            url: https://6b146da5trial-dev-l2d-products-srv.cfapps.us10-001.hana.ondemand.com
+            destination: L2D_PRODUCTS_API
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -33,3 +30,13 @@ server:
       configuration:
         flp:
           theme: sap_horizon
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /odata/v4/catalog
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+        annotations: []

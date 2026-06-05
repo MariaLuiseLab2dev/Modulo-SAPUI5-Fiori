@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotation Term="Core.Links">
+                <Collection>
+                    <Record>
+                        <PropertyValue Property="rel" String="author"/>
+                        <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+                    </Record>
+                </Collection>
+            </Annotation>
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Orders" EntityType="CatalogService.Orders">
+                    <NavigationPropertyBinding Path="product" Target="Products"/>
+                    <NavigationPropertyBinding Path="category" Target="Categories"/>
+                </EntitySet>
+                <EntitySet Name="Categories" EntityType="CatalogService.Categories"/>
+                <EntitySet Name="Products" EntityType="CatalogService.Products"/>
+                <FunctionImport Name="getFreight" Function="CatalogService.getFreight"/>
+                <ActionImport Name="submitOrder" Action="CatalogService.submitOrder" EntitySet="Orders"/>
+            </EntityContainer>
+            <EntityType Name="Orders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="createdDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="price" Type="Edm.Double"/>
+                <Property Name="quantity" Type="Edm.Double"/>
+                <NavigationProperty Name="product" Type="CatalogService.Products">
+                    <ReferentialConstraint Property="product_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="product_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="category" Type="CatalogService.Categories">
+                    <ReferentialConstraint Property="category_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="category_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Categories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Products">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <ComplexType Name="return_CatalogService_getFreight">
+                <Property Name="distance" Type="Edm.Double"/>
+                <Property Name="valuePerKm" Type="Edm.Double"/>
+                <Property Name="shipValue" Type="Edm.Double"/>
+            </ComplexType>
+            <Function Name="getFreight" IsBound="false" IsComposable="false">
+                <Parameter Name="pointA" Type="Edm.Int32"/>
+                <Parameter Name="pointB" Type="Edm.Int32"/>
+                <ReturnType Type="CatalogService.return_CatalogService_getFreight"/>
+            </Function>
+            <Action Name="submitOrder" IsBound="false">
+                <Parameter Name="description" Type="Edm.String"/>
+                <Parameter Name="price" Type="Edm.Double"/>
+                <Parameter Name="quantity" Type="Edm.Double"/>
+                <Parameter Name="productId" Type="Edm.String"/>
+                <Parameter Name="categoryId" Type="Edm.String"/>
+                <ReturnType Type="CatalogService.Orders"/>
+            </Action>
+            <Annotations Target="CatalogService.Orders/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Categories/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Products/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.getFreight(Edm.Int32,Edm.Int32)/pointA">
+                <Annotation Term="Core.OptionalParameter">
+                    <Record Type="Core.OptionalParameterType"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.getFreight(Edm.Int32,Edm.Int32)/pointB">
+                <Annotation Term="Core.OptionalParameter">
+                    <Record Type="Core.OptionalParameterType"/>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
