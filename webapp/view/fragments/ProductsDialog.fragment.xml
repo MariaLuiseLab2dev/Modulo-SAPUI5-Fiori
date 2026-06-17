@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog id="_IDproductDialog" title="Detalhes do Produto" contentWidth="400px">
+        <VBox class="sapUI">
+            <Label text="Nome do Produto" labelFor="_IDinputProductNameDialog" />
+            <Input id="_IDinputProductNameDialog" 
+                   placeholder="Digite o nome do produto" 
+                   width="100%" />
+        </VBox>
+        <buttons>
+            <Button text="Salvar" press=".onSaveProduct" />
+            <Button text="Excluir" press=".onDeleteProduct" />
+            <Button text="Fechar" press=".onCloseDialogPress" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

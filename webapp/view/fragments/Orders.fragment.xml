@@ -1,0 +1,68 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<VBox>
+    <Panel headerText="Cadastro de Pedido" expandable="false" class="sapUiContentPadding">
+                <HBox id="_IDHBoxCadastro" justifyContent="SpaceBetween">
+                    <VBox>
+                        <Label id="_IDlabelProduto" text="Produto" labelFor="_IDinputProduto" />
+                        <ComboBox id="_IDinputProduto"
+                                    placeholder="Selecione um produto"
+                                    items="{path: 'products>/'}"
+                                    selectionChange=".onProductChange"
+                                    width="300px">
+                            <core:Item key="{products>ID}" text="{products>name}" />
+                        </ComboBox>
+                    </VBox>
+
+                    <VBox>
+                        <Label id="_IDlabelCategoria" text="Categoria" labelFor="inputCategoria" />
+                        <ComboBox id="_IDinputCategoria"  placeholder="Selecione uma categoria" items="{path: 'categories>/'}" width="250px">
+                            <core:Item key="{categories>ID}" text="{categories>name}"/>
+                        </ComboBox>
+                    </VBox>
+                    
+                    <VBox>
+                        <Label id="_IDlabelQuantidade" text="Quantidade" labelFor="_IDinputQuantidade" />
+                        <Input id="_IDinputQuantidade" type="Number" placeholder="Digite a quantidade" width="120px"/>
+                    </VBox>
+
+                    <VBox>
+                        <Label id="_IDlabelValor" text="Valor" labelFor="inputValor" />
+                        <Input id="_IDinputValor" type="Number" placeholder="Digite um valor" width="200px"/>
+                    </VBox>
+                    
+                    <VBox>
+                        <Label id="_IDlabelData" text="Data" labelFor="inputData" />
+                        <Input id="_IDinputData" type="Date" value="{FieldsDate>/currentDate}" editable="false" width="200px"/>
+                    </VBox>
+                </HBox>
+
+                <HBox justifyContent="End">
+                    <Button id="_IDButtonAdd" text="Adicionar" press=".onAddOrder" />
+                </HBox>
+        <HBox >
+            <ComboBox items="{l2dProductsClient>/Clients}" class="sapUiTinyMarginEnd" placeholder="Selecione um cliente" width="300px">
+                <items>
+                    <core:Item key="{l2dProductsClient>id}" text="{l2dProductsClient>name}"></core:Item>
+                </items>
+            </ComboBox>
+            <Button icon="sap-icon://add" />
+        </HBox>
+    </Panel>
+
+    <Panel headerText="Lista de Pedidos" expandable="false">
+                <List
+                    id="idItemsList"
+                    items="{
+                        path: 'orders>/items'
+                    }"
+                >
+                    <ObjectListItem title="{orders>product}" type="Active" press=".onEditOrder">
+                        <ObjectAttribute title="Categoria" text="{orders>category}"></ObjectAttribute>
+                        <ObjectAttribute title="Preço" text="{ path: 'orders>price', formatter: '.formatPrice' }"></ObjectAttribute>
+                        <ObjectAttribute title="Quantidade" text="{orders>quantity}" />
+                        <ObjectAttribute title="Total" text="{ path: 'orders>total', formatter: '.formatPrice' }" />
+                    </ObjectListItem>
+                </List>
+    </Panel>
+</VBox>
+</core:FragmentDefinition>

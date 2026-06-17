@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog id="_IDclientDialog" title="Editar Cliente" stretch="false">
+        <VBox class="sapUiContentPadding">
+            <Label text="Nome do Cliente" labelFor="_IDinputClientNameDialog" />
+            <Input id="_IDinputClientNameDialog" width="100%" />
+
+            <Label text="CEP do Cliente" labelFor="_IDinputClientPostalDialog" />
+            <Input id="_IDinputClientPostalDialog" width="100%" />
+        </VBox>
+
+            <Button text="Salvar" press=".onSaveClient" />
+            <Button text="Excluir" press=".onDeleteClient" type="Reject" />
+            <Button text="Cancelar" press=".onCloseDialogPress" />
+    </Dialog>
+</core:FragmentDefinition>

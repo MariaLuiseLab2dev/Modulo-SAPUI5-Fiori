@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <VBox class="sapUiContentPadding">
+    <Panel headerText="Cadastro de Categoria" expandable="false" class="sapUiContentPadding">
+        <Label text="Nome da Categoria" labelFor="_IDinputCategoryName" />
+        <Input id="_IDinputCategoryName" 
+               placeholder="Digite o nome da categoria" 
+               width="100%" />
+
+        <HBox justifyContent="End">
+            <Button text="Adicionar Categoria" press=".onAddCategory" />
+        </HBox>
+    </Panel>
+
+    <Panel headerText="Lista de Categorias" expandable="false">
+        <List id="idCategoriesList" items="{path: 'categories>/'}">
+            <ObjectListItem title="{categories>name}" 
+                type="Active" 
+                press=".onEditCategory">
+                <ObjectAttribute title="ID" text="{categories>ID}" />
+            </ObjectListItem>
+        </List>
+    </Panel>
+    </VBox>
+</core:FragmentDefinition>

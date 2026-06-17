@@ -24,6 +24,15 @@
           "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "client": {
+        "uri": "/odata/v2/client/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/client/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -71,6 +80,12 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "l2dProductsClient": {
+        "dataSource": "client",
+        "uri": "l2dProductsClient/odata/v2/client",
+        "preload": true,
+        "settings": {}
       }
     },
     "resources": {

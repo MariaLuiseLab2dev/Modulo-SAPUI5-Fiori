@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core" >
+    <Dialog id="_IDorderDialog" title="Detalhes do Pedido" contentWidth="400px" contentHeight="auto" stretchOnPhone="true">
+            <VBox class="sapUiSmallMargin">
+                <Label id="_IDlabelProdutoDialog" text="Produto" labelFor="_IDinputProdutoDialog" />
+                <ComboBox id="_IDinputProdutoDialog"
+                            placeholder="Selecione um produto"
+                            items="{path: 'products>/'}"
+                            selectionChange=".onProductChangeDialog"
+                            width="100%">
+                    <core:Item key="{products>ID}" text="{products>name}" />
+                </ComboBox>
+                <Label id="_IDlabelCategoriaDialog" text="Categoria" labelFor="inputCategoriaDialog" />
+                <ComboBox id="_IDinputCategoriaDialog"  placeholder="Selecione uma categoria" items="{path: 'categories>/'}" width="100%">
+                    <core:Item key="{categories>ID}" text="{categories>name}"/>
+                </ComboBox>
+                <Label id="_IDlabelQuantidadeDialog" text="Quantidade" labelFor="_IDinputQuantidadeDialog" />
+                <Input id="_IDinputQuantidadeDialog" type="Number" placeholder="Digite a quantidade" width="100%"/>
+                <Label id="_IDlabelValorDialog" text="Valor" labelFor="inputValorDialog" />
+                <Input id="_IDinputValorDialog" type="Number" placeholder="Digite um valor" width="100%"/>
+                <Label id="_IDlabelDataDialog" text="Data" labelFor="inputDataDialog" />
+                <Input id="_IDinputDataDialog" type="Date" value="{FieldsDate>/currentDate}" editable="false" width="100%"/>
+            </VBox>
+            <buttons>
+                <Button text="Salvar" press=".onSaveOrder" />
+                <Button text="Excluir" press=".onDeleteOrder" />
+                <Button text="Fechar" press=".onCloseDialogPress" />
+            </buttons>
+        </Dialog>
+</core:FragmentDefinition>

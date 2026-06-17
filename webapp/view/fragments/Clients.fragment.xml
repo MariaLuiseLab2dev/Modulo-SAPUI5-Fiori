@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+<VBox>
+    <Panel headerText="Cadastro de Cliente" expandable="false" class="sapUiContentPadding">
+        <HBox class="sapUiSmallMarginBottom" justifyContent="SpaceBetween">
+            <Input id="_IDclientNameInput" placeholder="Nome do cliente" width="500px"/>
+            <Input id="_IDclientPostalCodeInput" placeholder="CEP do cliente" width="300px"/>
+            <Button text="Adicionar Cliente" press=".onAddClient" />
+        </HBox>
+    </Panel>
+
+    <Panel
+        headerText="Lista de Clientes"
+        expandable="false"
+        class="sapUiContentPadding"
+    >
+        <Table items="{/clients}">
+            <columns>
+                <Column>
+                    <Text text="ID" />
+                </Column>
+                <Column>
+                    <Text text="Nome" />
+                </Column>
+
+                <Column>
+                    <Text text="CEP" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Active" press=".onEditClient">
+                    <Text text="{ID}" />
+                    <Text text="{name}" />
+                    <Text text="{postalCode}" />
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Panel>
+</VBox>
+</core:FragmentDefinition>

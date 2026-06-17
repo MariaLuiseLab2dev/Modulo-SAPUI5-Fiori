@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <VBox class="sapUiContentPadding">
+        <Panel headerText="Cadastro de Produto" expandable="false" class="sapUiContentPadding">
+            <Label text="Nome do Produto" labelFor="_IDinputProductName" />
+            <Input id="_IDinputProductName" 
+                placeholder="Digite o nome do produto" 
+                width="100%" />
+
+            <HBox justifyContent="End">
+                <Button text="Adicionar Produto" press=".onAddProduct" />
+            </HBox>
+        </Panel>
+
+        <Panel headerText="Lista de Produtos" expandable="false">
+            <List id="idProductsList" items="{path: 'products>/'}">
+                <ObjectListItem title="{products>name}" 
+                    type="Active" 
+                    press=".onEditProduct">
+                    <ObjectAttribute title="ID" text="{products>ID}" />
+                </ObjectListItem>
+            </List>
+        </Panel>
+    </VBox>
+</core:FragmentDefinition>

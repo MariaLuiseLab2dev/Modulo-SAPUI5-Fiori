@@ -28,9 +28,12 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertErrors: false
         backend:
           - path: /odata/v4/catalog
+            url: https://6b146da5trial-dev-l2d-products-srv.cfapps.us10-001.hana.ondemand.com
+            destination: L2D_PRODUCTS_API
+          - path: /odata/v2/client
             url: https://6b146da5trial-dev-l2d-products-srv.cfapps.us10-001.hana.ondemand.com
             destination: L2D_PRODUCTS_API
     - name: sap-fe-mockserver
@@ -41,5 +44,13 @@ server:
           - urlPath: /odata/v4/catalog
             metadataPath: ./webapp/localService/mainService/metadata.xml
             mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: l2dProductsCatalog/odata/v4/catalog
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /odata/v2/client
+            metadataPath: ./webapp/localService/client/metadata.xml
+            mockdataPath: ./webapp/localService/client/data
             generateMockData: true
         annotations: []

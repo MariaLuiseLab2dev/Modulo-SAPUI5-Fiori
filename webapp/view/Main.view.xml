@@ -3,56 +3,24 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
 
-    <Page id="_IDpage" title="Pedidos">
-            <Panel headerText="Cadastro de Pedido" expandable="false" class="sapUiContentPadding">
-                <HBox id="_IDHBoxCadastro" justifyContent="SpaceBetween">
-                    <VBox>
-                        <Label id="_IDlabelProduto" text="Produto" labelFor="_IDinputProduto" />
-                        <ComboBox id="_IDinputProduto"
-                                    placeholder="Selecione um produto"
-                                    items="{path: 'products>/'}"
-                                    selectionChange=".onProductChange"
-                                    width="300px">
-                            <core:Item key="{products>ID}" text="{products>name}" />
-                        </ComboBox>
-                    </VBox>
+    <Page id="_IDpage" title="Lab2Store" class="sapUiContentPadding">
+        <IconTabBar select=".onTabSelect">
+            <items>
+                <IconTabFilter key="orders" icon="sap-icon://cart" text="Pedidos">
+                    <VBox id="ordersContent"/>
+                </IconTabFilter>
+                <IconTabFilter key="products" icon="sap-icon://product" text="Produtos">
+                    <VBox id="productsContent"/>
+                </IconTabFilter>
+                
+                <IconTabFilter key="categories" icon="sap-icon://notes" text="Categorias">
+                    <VBox id="categoriesContent"/>
+                </IconTabFilter>
 
-                    <VBox>
-                        <Label id="_IDlabelCategoria" text="Categoria" labelFor="inputCategoria" />
-                        <ComboBox id="_IDinputCategoria"  placeholder="Selecione uma categoria" items="{path: 'l2dProductsCatalog>/Categories'}" width="250px">
-                            <core:Item key="{l2dProductsCatalog>ID}" text="{l2dProductsCatalog>name}"/>
-                        </ComboBox>
-                    </VBox>
-                    
-                    <VBox>
-                        <Label id="_IDlabelValor" text="Valor" labelFor="inputValor" />
-                        <Input id="_IDinputValor" type="Number" placeholder="Digite um valor" width="200px"/>
-                    </VBox>
-                    
-                    <VBox>
-                        <Label id="_IDlabelData" text="Data" labelFor="inputData" />
-                        <Input id="_IDinputData" type="Date" value="{FieldsDate>/currentDate}" editable="false" width="200px"/>
-                    </VBox>
-                </HBox>
-
-                <HBox justifyContent="End">
-                    <Button id="_IDButtonAdd" text="Adicionar" press=".onAddItemPress" />
-                </HBox>
-               
-            </Panel>
-
-            <Panel headerText="Lista de Pedidos" expandable="false">
-                <List
-                    id="idItemsList"
-                    items="{
-                        path: 'orders>/items'
-                    }"
-                >
-                    <ObjectListItem title="{orders>product}">
-                        <ObjectAttribute title="Preço" text="{ path: 'orders>price', formatter: '.formatPrice' }"></ObjectAttribute>
-                        <ObjectAttribute title="Categoria" text="{orders>category}"></ObjectAttribute>
-                    </ObjectListItem>
-                </List>
-            </Panel>
+                <IconTabFilter key="clients" icon="sap-icon://customer" text="Clientes">
+                    <VBox id="clientsContent"/>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
     </Page>
 </mvc:View>
